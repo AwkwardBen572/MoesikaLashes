@@ -1,5 +1,5 @@
 {{--DESKTOP--}}
-<header class="w-full h-20 shadow-lg bg-linen-cream hidden lg:flex flex-row items-center text-olive-sage">
+<header class="w-full h-20 shadow-lg bg-linen-cream hidden lg:flex flex-row items-center text-olive-sage montserrat-alternates-regular">
     <div class="w-[20%] h-full">
         <img src="{{ asset('images/logo_short.png') }}" alt="logo_short" class="w-25 h-full mx-auto">
     </div>
@@ -14,9 +14,9 @@
 {{--DESKTOP--}}
 
 {{--MOBILE--}}
-<header class="lg:hidden flex w-full justify-end items-center p-4">
-    <button id="menu-toggle" type="button" class="bg-olive-sage p-8 rounded-full">
-        <i class="fa fa-bars text-icon-mobile text-white"></i>
+<header class="lg:hidden flex w-full justify-end items-center p-4 absolute top-0 left-0 z-20 montserrat-alternates-regular">
+    <button id="menu-toggle" type="button" class="bg-white p-8 rounded-full shadow-2xl shadow-black">
+        <i class="fa fa-bars text-icon-mobile text-olive-sage"></i>
     </button>
 
     <nav id="mobile-menu" class="lg:hidden fixed top-0 left-0 z-50 w-full h-1/5 bg-linen-cream shadow-lg flex flex-col items-center justify-around gap-4 -translate-y-full transition-transform duration-300 text-header-mobile text-olive-sage">
