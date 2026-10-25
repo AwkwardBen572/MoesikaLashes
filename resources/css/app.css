@@ -4,139 +4,144 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Montserrat Alternates', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
 
     --color-olive-sage: #6E7C61;
+    --color-olive-deep: #4E5944;
     --color-linen-cream: #EDE5D8;
+    --color-linen-light: #F7F3EC;
+    --color-ink: #3D4237;
 
-    --text-header-desktop: 1.125rem;
-    --text-header-mobile: 2rem;
+    --text-header-desktop: 1rem;
+    --text-header-mobile: 1.5rem;
 
-    --text-icon-desktop: 1.5rem;
-    --text-icon-mobile: 2.5rem;
+    --text-icon-desktop: 1.25rem;
+    --text-icon-mobile: 1.5rem;
 
-    --text-h1: 3rem;
-    --text-p: 1.5rem;
+    --text-h1: 4rem;
+    --text-h2: 3.75rem;
+    --text-h3: 1.875rem;
+    --text-h4: 1.5rem;
+    --text-p: 1.0625rem;
 
-    --text-h1-mobile: 4rem;
-    --text-p-mobile: 2.5rem;
+    --text-h1-mobile: 2.5rem;
+    --text-h2-mobile: 2.5rem;
+    --text-h3-mobile: 1.75rem;
+    --text-h4-mobile: 1.5rem;
+    --text-p-mobile: 1rem;
 }
 
+/*
+ * Type system: every heading level and paragraph has exactly one style.
+ * Views set colour and spacing only, never font family, size or weight.
+ */
 @layer base {
+    html {
+        scroll-behavior: smooth;
+        /* Clears the sticky notice bar (and the desktop menu) when jumping to a section */
+        @apply scroll-pt-12 lg:scroll-pt-32;
+    }
+
+    body {
+        @apply bg-linen-light text-ink font-sans font-light antialiased;
+    }
+
+    h1, h2, h3, h4 {
+        /* Cormorant defaults to old-style figures, which make prices like R10,000 hard to read */
+        @apply font-display font-light leading-tight lining-nums;
+    }
+
     h1 {
         @apply lg:text-h1 text-h1-mobile;
     }
 
+    h2 {
+        @apply lg:text-h2 text-h2-mobile;
+    }
+
+    h3 {
+        @apply lg:text-h3 text-h3-mobile;
+    }
+
+    h4 {
+        @apply lg:text-h4 text-h4-mobile font-normal;
+    }
+
     p {
-        @apply lg:text-p text-p-mobile;
+        @apply lg:text-p text-p-mobile leading-relaxed;
     }
 }
 
-.montserrat-alternates-thin {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 100;
-    font-style: normal;
+@layer components {
+    /* Small uppercase label above a section heading */
+    .eyebrow {
+        @apply block font-sans font-normal text-sm uppercase tracking-[0.3em];
+    }
+
+    /* Smaller supporting text: prices, list items, captions */
+    .detail {
+        @apply font-sans font-light text-sm;
+    }
+
+    /* Client review quote */
+    .quote {
+        @apply font-display italic font-light lg:text-3xl text-2xl leading-snug lining-nums;
+    }
+
+    /* Italic signature line, e.g. "by Tania" */
+    .tagline {
+        @apply font-display italic text-2xl lining-nums;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-3 px-8 py-3 rounded-full font-sans font-normal text-base transition-colors;
+    }
+
+    .btn-primary {
+        @apply bg-olive-sage text-white hover:bg-olive-deep;
+    }
+
+    .btn-light {
+        @apply bg-linen-light text-olive-deep hover:bg-white;
+    }
+
+    .btn-outline {
+        @apply border border-linen-light/70 text-white hover:bg-linen-light/10;
+    }
 }
 
-.montserrat-alternates-extralight {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 200;
-    font-style: normal;
+/* Thin ornamental divider used under section headings */
+.flourish {
+    @apply flex items-center justify-center gap-3 text-olive-sage;
 }
 
-.montserrat-alternates-light {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 300;
-    font-style: normal;
+.flourish::before,
+.flourish::after {
+    content: '';
+    @apply h-px w-12 bg-current opacity-60;
 }
 
-.montserrat-alternates-regular {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+/* Fade-up on scroll, toggled by resources/js/app.js (only when JS is running) */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-.montserrat-alternates-medium {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 500;
-    font-style: normal;
+.js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
 }
 
-.montserrat-alternates-semibold {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-}
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 
-.montserrat-alternates-bold {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.montserrat-alternates-extrabold {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-}
-
-.montserrat-alternates-black {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 900;
-    font-style: normal;
-}
-
-.montserrat-alternates-thin-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 100;
-    font-style: italic;
-}
-
-.montserrat-alternates-extralight-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 200;
-    font-style: italic;
-}
-
-.montserrat-alternates-light-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 300;
-    font-style: italic;
-}
-
-.montserrat-alternates-regular-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 400;
-    font-style: italic;
-}
-
-.montserrat-alternates-medium-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 500;
-    font-style: italic;
-}
-
-.montserrat-alternates-semibold-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 600;
-    font-style: italic;
-}
-
-.montserrat-alternates-bold-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 700;
-    font-style: italic;
-}
-
-.montserrat-alternates-extrabold-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 800;
-    font-style: italic;
-}
-
-.montserrat-alternates-black-italic {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-weight: 900;
-    font-style: italic;
+    .js .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
